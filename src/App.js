@@ -1,10 +1,13 @@
 import './App.css';
+import Layout from './hoc/Layout/Layout';
 
 function App() {
   return (
-    <div className="App">
-      <h1>hello!</h1>
-    </div>
+    <Layout>
+      <div style={{width: '400px', border: '1px solid #000'}}>
+        <h1>Layout</h1>
+      </div>
+    </Layout>
   );
 }
 
