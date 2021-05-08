@@ -6,9 +6,11 @@ const AnswersList = props => {
     
   //} = props;
   return (
-   <div className={classes.AnswersList}>
-    <li>1</li>
-   </div>
+   <ul className={classes.AnswersList}>
+    {props.answers.map((answer, index) => {
+      
+    }) }
+   </ul>
   );
 };
   
