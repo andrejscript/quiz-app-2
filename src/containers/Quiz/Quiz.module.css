@@ -4,4 +4,14 @@
   padding-top: 100px;
   flex-grow: 1;
   width: 100%;
+  background: linear-gradient(90deg, #41b2b2 0%, #cbe948);
+}
+
+.Quiz h1 {
+  color: #fff;
+  margin-left: 10px;
+}
+
+.QuizWrapper {
+  width: 600px;
 }
