@@ -1,17 +1,15 @@
 import React from 'react';
 import classes from './AnswersList.module.css';
+import AnswerItem from './AnswerItem/AnswerItem';
 
-const AnswersList = props => {
-  //const {
-    
-  //} = props;
+const AnswersList = ({ answers }) => {
   return (
-   <ul className={classes.AnswersList}>
-    {props.answers.map((answer, index) => {
-      
-    }) }
-   </ul>
+    <ul className={classes.AnswersList}>
+      {answers.map((answer, index) => {
+        return <AnswerItem answer={answer} key={answer.id} />;
+      })}
+    </ul>
   );
 };
-  
+
 export default AnswersList;
