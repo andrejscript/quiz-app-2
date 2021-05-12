@@ -32,12 +32,14 @@ export default class Quiz extends Component {
   };
 
   onAnswerClickHandler = (answerId) => {
-    
+    this.setState({
+      activeQuestion: this.state.activeQuestion + 1,
+    });
   };
 
   render() {
     const { activeQuestion, quiz } = this.state;
-    const { question, answers } = this.state.quiz[0];
+    const { question, answers } = this.state.quiz[activeQuestion];
     return (
       <div className={classes.Quiz}>
         <div className={classes.QuizWrapper}>
