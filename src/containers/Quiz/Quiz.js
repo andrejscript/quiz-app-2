@@ -32,10 +32,30 @@ export default class Quiz extends Component {
   };
 
   onAnswerClickHandler = (answerId) => {
-    this.setState({
-      activeQuestion: this.state.activeQuestion + 1,
-    });
-  };
+    const { question } = this.state.quiz[this.state.activeQuestion];
+
+
+    if (question.rightAnsweId === answerId) {
+      const timeout = window.setTimeout(() => {
+        if (this.isQuizFinished()) {
+  console.log('succes');
+  
+        }else {
+          this.setState({
+            activeQuestion: this.state.activeQuestion + 1,
+          })
+        }
+        window.clearTimeout(timeout)
+      }, 1000)
+    } else {
+
+    }
+
+  }
+
+  isQuizFinished() {
+    return this.state.activeQuestion + 1 === this.state.quiz.length
+  }
 
   render() {
     const { activeQuestion, quiz } = this.state;
