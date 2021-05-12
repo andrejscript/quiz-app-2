@@ -2,9 +2,7 @@ import React from 'react';
 import classes from './ActiveQuiz.module.css';
 import AnswersList from './AnswersList/AnswersList';
 
-const ActiveQuiz = props => {
-  console.log(props);
-  
+const ActiveQuiz = props => { 
   let { question, answers, onAnswerClick, quizLength, answerNumber } = props;
 
   return (
