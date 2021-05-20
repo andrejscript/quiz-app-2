@@ -34,13 +34,17 @@ export default class Quiz extends Component {
   };
 
   onAnswerClickHandler = (answerId) => {
+    if (this.state.answerState) {
+      return;
+    }
+
+
     const question = this.state.quiz[this.state.activeQuestion];
 
     if (question.rightAnswerId === answerId) {
-
       this.setState({
-        answerState: {[answerId]: 'success'} 
-      })
+        answerState: { [answerId]: 'success' },
+      });
 
       const timeout = window.setTimeout(() => {
         if (this.isQuizFinished()) {
@@ -48,18 +52,19 @@ export default class Quiz extends Component {
             finishedStage: true,
           });
         } else {
-          this.setState({
-            activeQuestion: this.state.activeQuestion + 1,
-            answerState: null,
+          this.setState((state) => {
+            return {
+              activeQuestion: this.state.activeQuestion + 1,
+              answerState: null,
+            };
           });
         }
         window.clearTimeout(timeout);
       }, 1000);
     } else {
       this.setState({
-        activeQuestion: this.state.activeQuestion + 1,
-        answerState: {[answerId]: 'error'},
-      })
+        answerState: { [answerId]: 'error' },
+      });
     }
   };
 
