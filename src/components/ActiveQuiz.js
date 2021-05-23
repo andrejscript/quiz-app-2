@@ -14,12 +14,12 @@ const ActiveQuiz = props => {
    <div className={classes.ActiveQuiz}>
        <p className={classes.Question}>
         <span>
-          <strong>{question.id} </strong> 
+          <strong>{quiz[0].id} </strong> 
           {question}
         </span>
 
         <small>
-          {question.id} from {quiz.length}
+          {quiz[0].id} from {quiz.length}
         </small>
       </p>
    
