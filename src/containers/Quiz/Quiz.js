@@ -4,10 +4,12 @@ import ActiveQuiz from '../../components/ActiveQuiz';
 
 export default class Quiz extends Component {
   state = {
+    activeQuestion: 0,
     quiz: [
       {
         question: 'What is your name?',
         id: 1,
+        rightAnswer: 4,
         answers: [
           { text: 'Jack', id: 1 },
           { text: 'Smith', id: 2 },
@@ -18,16 +20,18 @@ export default class Quiz extends Component {
       {
         question: 'How old are you?',
         id: 2,
+        rightAnswer: 2,
         answers: [
           { text: '17', id: 1 },
+          { text: '32', id: 2 },
           { text: '22', id: 2 },
-          { text: '34', id: 3 },
           { text: '45', id: 4 },
         ],
       },
       {
         question: 'What is your job?',
         id: 3,
+        rightAnswer: 3,
         answers: [
           { text: 'Sailor', id: 1 },
           { text: 'Artist', id: 2 },
@@ -39,12 +43,14 @@ export default class Quiz extends Component {
   };
 
   onAnswerClickHandler = (id) => {
-    console.log(id);
+    if (id === this.state.quiz[this.state.activeQuestion+1].rightAnswer) {
+
+    }
     
   }
 
   render() {
-    const { quiz } = this.state;
+    const { quiz, activeQuestion } = this.state;
 
     return (
       <div className={classes.Quiz}>
@@ -52,9 +58,9 @@ export default class Quiz extends Component {
           <h1>Answer all the questions</h1>
           <ActiveQuiz 
             quiz={quiz}
-            activeAnswers={quiz[0].answers}
-            activeQuizNumber={quiz[0].id}
-            question={quiz[0].question} 
+            activeAnswers={quiz[activeQuestion+1].answers}
+            activeQuizNumber={quiz[activeQuestion+1].id}
+            question={quiz[activeQuestion+1].question} 
             onAnswerClick={this.onAnswerClickHandler}
             />
         </div>
