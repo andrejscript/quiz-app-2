@@ -15,8 +15,33 @@ export default class Quiz extends Component {
           { text: 'Willy', id: 4 },
         ],
       },
+      {
+        question: 'How old are you?',
+        id: 2,
+        answers: [
+          { text: '17', id: 1 },
+          { text: '22', id: 2 },
+          { text: '34', id: 3 },
+          { text: '45', id: 4 },
+        ],
+      },
+      {
+        question: 'What is your job?',
+        id: 3,
+        answers: [
+          { text: 'Sailor', id: 1 },
+          { text: 'Artist', id: 2 },
+          { text: 'Coder', id: 3 },
+          { text: 'Lawyer', id: 4 },
+        ],
+      },
     ],
   };
+
+  onAnswerClickHandler = (id) => {
+    console.log(id);
+    
+  }
 
   render() {
     const { quiz } = this.state;
@@ -27,7 +52,11 @@ export default class Quiz extends Component {
           <h1>Answer all the questions</h1>
           <ActiveQuiz 
             quiz={quiz}
-            question={quiz[0].question} />
+            activeAnswers={quiz[0].answers}
+            activeQuizNumber={quiz[0].id}
+            question={quiz[0].question} 
+            onAnswerClick={this.onAnswerClickHandler}
+            />
         </div>
       </div>
     );
