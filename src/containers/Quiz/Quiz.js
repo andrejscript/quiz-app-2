@@ -24,7 +24,7 @@ export default class Quiz extends Component {
         answers: [
           { text: '17', id: 1 },
           { text: '32', id: 2 },
-          { text: '22', id: 2 },
+          { text: '22', id: 3 },
           { text: '45', id: 4 },
         ],
       },
@@ -43,9 +43,15 @@ export default class Quiz extends Component {
   };
 
   onAnswerClickHandler = (id) => {
-    if (id === this.state.quiz[this.state.activeQuestion+1].rightAnswer) {
-
+    const timeout = window.setTimeout(() => {
+    if (id === this.state.quiz[this.state.activeQuestion].rightAnswer) {
+      console.log('y', id)
+      this.setState({activeQuestion: this.state.activeQuestion+1})
     }
+    console.log('n', id)
+
+    window.clearTimeout(timeout);
+  }, 1000);
     
   }
 
@@ -58,9 +64,9 @@ export default class Quiz extends Component {
           <h1>Answer all the questions</h1>
           <ActiveQuiz 
             quiz={quiz}
-            activeAnswers={quiz[activeQuestion+1].answers}
-            activeQuizNumber={quiz[activeQuestion+1].id}
-            question={quiz[activeQuestion+1].question} 
+            activeAnswers={quiz[activeQuestion].answers}
+            activeQuizNumber={quiz[activeQuestion].id}
+            question={quiz[activeQuestion].question} 
             onAnswerClick={this.onAnswerClickHandler}
             />
         </div>
