@@ -44,7 +44,7 @@ export default class Quiz extends Component {
 
   onAnswerClickHandler = (id) => {
     if (id === this.state.quiz[this.state.activeQuestion].rightAnswer) {
-      console.log('y', id);
+      console.log('yeap', id);
       this.setState({ activeQuestion: this.state.activeQuestion + 1 });
     }
     console.log('none', id);
