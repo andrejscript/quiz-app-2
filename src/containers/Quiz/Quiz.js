@@ -43,17 +43,12 @@ export default class Quiz extends Component {
   };
 
   onAnswerClickHandler = (id) => {
-    const timeout = window.setTimeout(() => {
     if (id === this.state.quiz[this.state.activeQuestion].rightAnswer) {
-      console.log('y', id)
-      this.setState({activeQuestion: this.state.activeQuestion+1})
+      console.log('y', id);
+      this.setState({ activeQuestion: this.state.activeQuestion + 1 });
     }
-    console.log('n', id)
-
-    window.clearTimeout(timeout);
-  }, 1000);
-    
-  }
+    console.log('none', id);
+  };
 
   render() {
     const { quiz, activeQuestion } = this.state;
@@ -62,13 +57,13 @@ export default class Quiz extends Component {
       <div className={classes.Quiz}>
         <div className={classes.QuizWrapper}>
           <h1>Answer all the questions</h1>
-          <ActiveQuiz 
+          <ActiveQuiz
             quiz={quiz}
             activeAnswers={quiz[activeQuestion].answers}
             activeQuizNumber={quiz[activeQuestion].id}
-            question={quiz[activeQuestion].question} 
+            question={quiz[activeQuestion].question}
             onAnswerClick={this.onAnswerClickHandler}
-            />
+          />
         </div>
       </div>
     );
