@@ -39,6 +39,17 @@ export default class Quiz extends Component {
           { text: 'Lawyer', id: 4 },
         ],
       },
+      {
+        question: 'What is your hobby?',
+        id: 1,
+        rightAnswer: 2,
+        answers: [
+          { text: 'Sailor', id: 1 },
+          { text: 'Artist', id: 2 },
+          { text: 'Coder', id: 3 },
+          { text: 'Lawyer', id: 4 },
+        ],
+      },
     ],
   };
 
