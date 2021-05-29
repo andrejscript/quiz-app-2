@@ -8,6 +8,7 @@ export default class Quiz extends Component {
     questionCounter: 0,
     answerStatus: null, //{[id]: 'success'/'wrong'}
     isFinished: true,
+    results: {},
     quiz: [
       {
         question: 'What is your name?',

@@ -11,7 +11,12 @@ const FinishedQuiz = props => {
         <li>
           <strong>1. </strong>
           How are you?
-          <i className={' '}></i>`
+          <i className={'fa fa-times ' + classes.wrong}></i>
+        </li>
+        <li>
+          <strong>2. </strong>
+          WT r doing?
+          <i className={'fa fa-check ' + classes.success}></i>
         </li>
       </ul>
 
