@@ -4,7 +4,8 @@ import ActiveQuiz from '../../components/ActiveQuiz';
 
 export default class Quiz extends Component {
   state = {
-    activeQuestion: 0,
+    questionCounter: 0,
+    quizStatus: null,
     quiz: [
       {
         question: 'What is your name?',
@@ -41,10 +42,10 @@ export default class Quiz extends Component {
       },
       {
         question: 'What is your hobby?',
-        id: 1,
-        rightAnswer: 2,
+        id: 4,
+        rightAnswer: 3,
         answers: [
-          { text: 'Sprot', id: 1 },
+          { text: 'Sport', id: 1 },
           { text: 'Cooking', id: 2 },
           { text: 'Travelling', id: 3 },
           { text: 'Pets', id: 4 },
@@ -53,16 +54,27 @@ export default class Quiz extends Component {
     ],
   };
 
-  onAnswerClickHandler = (id) => {
-    if (id === this.state.quiz[this.state.activeQuestion].rightAnswer) {
-      console.log('yeap', id);
-      this.setState({ activeQuestion: this.state.activeQuestion + 1 });
+  onAnswerClickHandler = answerId => {
+    const { questionCounter, quiz } = this.state,
+      activeQuestion = quiz[questionCounter];
+
+    if (activeQuestion.rightAnswer === answerId) {
+      console.log(true);
+    } else {
+      console.log(false);
     }
-    console.log('none', id);
+
+    const timeout = window.setTimeout(() => {
+      this.setState(prevState => ({
+        questionCounter: prevState.questionCounter + 1,
+      }));
+
+      window.clearTimeout(timeout);
+    }, 1000);
   };
 
   render() {
-    const { quiz, activeQuestion } = this.state;
+    const { quiz, questionCounter } = this.state;
 
     return (
       <div className={classes.Quiz}>
@@ -70,9 +82,9 @@ export default class Quiz extends Component {
           <h1>Answer all the questions</h1>
           <ActiveQuiz
             quiz={quiz}
-            activeAnswers={quiz[activeQuestion].answers}
-            activeQuizNumber={quiz[activeQuestion].id}
-            question={quiz[activeQuestion].question}
+            activeAnswers={quiz[questionCounter].answers}
+            activeQuizNumber={quiz[questionCounter].id}
+            question={quiz[questionCounter].question}
             onAnswerClick={this.onAnswerClickHandler}
           />
         </div>
