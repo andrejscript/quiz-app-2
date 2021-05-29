@@ -58,13 +58,20 @@ export default class Quiz extends Component {
   onAnswerClickHandler = answerId => {
     const { questionCounter, quiz } = this.state,
       activeQuestion = quiz[questionCounter];
+    // Multiple click checking
+    if (this.state.answerStatus) {
+      return;
+    }
 
+    // Finish Quiz cheching
     if (this.isQuizFinished()) {
       console.log('Finished');
     } else {
+      // Setting a timeout between checking responses
       const timeout = window.setTimeout(() => {
         this.setState(prevState => ({
           questionCounter: prevState.questionCounter + 1,
+          answerStatus: null,
         }));
 
         window.clearTimeout(timeout);
