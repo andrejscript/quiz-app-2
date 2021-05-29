@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import classes from './Quiz.module.css';
-import ActiveQuiz from '../../components/ActiveQuiz';
+import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz';
+import FinishedQuiz from '../../components/FinishedQuiz/FinishedQuiz';
 
 export default class Quiz extends Component {
   state = {
     questionCounter: 0,
     answerStatus: null, //{[id]: 'success'/'wrong'}
-    isQuizFinished: null,
+    isFinished: false,
     quiz: [
       {
         question: 'What is your name?',
@@ -65,7 +66,7 @@ export default class Quiz extends Component {
 
     // Finish Quiz cheching
     if (this.isQuizFinished()) {
-      console.log('Finished');
+      this.setState({ isFinished: true });
     } else {
       // Setting a timeout between checking responses
       const timeout = window.setTimeout(() => {
@@ -90,20 +91,28 @@ export default class Quiz extends Component {
   }
 
   render() {
-    const { quiz, questionCounter, answerStatus } = this.state;
+    const { quiz, questionCounter, answerStatus, isFinished } = this.state;
 
     return (
       <div className={classes.Quiz}>
         <div className={classes.QuizWrapper}>
-          <h1>Answer all the questions</h1>
-          <ActiveQuiz
-            quiz={quiz}
-            activeAnswers={quiz[questionCounter].answers}
-            activeQuizNumber={quiz[questionCounter].id}
-            question={quiz[questionCounter].question}
-            answerStatus={answerStatus}
-            onAnswerClick={this.onAnswerClickHandler}
-          />
+          {isFinished ? (
+            <>
+              <FinishedQuiz />
+            </>
+          ) : (
+            <>
+              <h1>Answer all the questions</h1>
+              <ActiveQuiz
+                quiz={quiz}
+                activeAnswers={quiz[questionCounter].answers}
+                activeQuizNumber={quiz[questionCounter].id}
+                question={quiz[questionCounter].question}
+                answerStatus={answerStatus}
+                onAnswerClick={this.onAnswerClickHandler}
+              />
+            </>
+          )}
         </div>
       </div>
     );
