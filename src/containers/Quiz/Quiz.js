@@ -5,7 +5,8 @@ import ActiveQuiz from '../../components/ActiveQuiz';
 export default class Quiz extends Component {
   state = {
     questionCounter: 0,
-    quizStatus: null,
+    answerStatus: null, //{[id]: 'success'/'wrong'}
+    isQuizFinished: null,
     quiz: [
       {
         question: 'What is your name?',
@@ -58,20 +59,29 @@ export default class Quiz extends Component {
     const { questionCounter, quiz } = this.state,
       activeQuestion = quiz[questionCounter];
 
-    if (activeQuestion.rightAnswer === answerId) {
-      console.log(true);
+    if (this.isQuizFinished()) {
+      console.log('Finished');
     } else {
-      console.log(false);
+      console.log('Last...');
+      const timeout = window.setTimeout(() => {
+        this.setState(prevState => ({
+          questionCounter: prevState.questionCounter + 1,
+        }));
+
+        window.clearTimeout(timeout);
+      }, 1000);
+
+      if (activeQuestion.rightAnswer === answerId) {
+        console.log('Right )');
+      } else {
+        console.log('Wrong (');
+      }
     }
-
-    const timeout = window.setTimeout(() => {
-      this.setState(prevState => ({
-        questionCounter: prevState.questionCounter + 1,
-      }));
-
-      window.clearTimeout(timeout);
-    }, 1000);
   };
+
+  isQuizFinished() {
+    return this.state.questionCounter + 1 === this.state.quiz.length;
+  }
 
   render() {
     const { quiz, questionCounter } = this.state;
