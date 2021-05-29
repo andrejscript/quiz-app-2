@@ -7,7 +7,7 @@ export default class Quiz extends Component {
   state = {
     questionCounter: 0,
     answerStatus: null, //{[id]: 'success'/'wrong'}
-    isFinished: false,
+    isFinished: true,
     quiz: [
       {
         question: 'What is your name?',
