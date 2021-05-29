@@ -2,8 +2,15 @@ import React from 'react';
 import AnswerList from './AnswerList/AnswerList';
 import classes from './ActiveQuiz.module.css';
 
-const ActiveQuiz = (props) => {
-  const { quiz, question, activeAnswers, activeQuizNumber, onAnswerClick } = props;
+const ActiveQuiz = props => {
+  const {
+    quiz,
+    question,
+    activeAnswers,
+    activeQuizNumber,
+    answerStatus,
+    onAnswerClick,
+  } = props;
 
   return (
     <div className={classes.ActiveQuiz}>
@@ -17,9 +24,11 @@ const ActiveQuiz = (props) => {
           {activeQuizNumber} from {quiz.length}
         </small>
       </p>
-      <AnswerList 
+      <AnswerList
         answers={activeAnswers}
-        onAnswerClick={onAnswerClick} />
+        answerStatus={answerStatus}
+        onAnswerClick={onAnswerClick}
+      />
     </div>
   );
 };

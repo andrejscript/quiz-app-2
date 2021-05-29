@@ -62,7 +62,6 @@ export default class Quiz extends Component {
     if (this.isQuizFinished()) {
       console.log('Finished');
     } else {
-      console.log('Last...');
       const timeout = window.setTimeout(() => {
         this.setState(prevState => ({
           questionCounter: prevState.questionCounter + 1,
@@ -72,9 +71,9 @@ export default class Quiz extends Component {
       }, 1000);
 
       if (activeQuestion.rightAnswer === answerId) {
-        console.log('Right )');
+        this.setState({ answerStatus: { [answerId]: 'success' } });
       } else {
-        console.log('Wrong (');
+        this.setState({ answerStatus: { [answerId]: 'wrong' } });
       }
     }
   };
@@ -84,7 +83,7 @@ export default class Quiz extends Component {
   }
 
   render() {
-    const { quiz, questionCounter } = this.state;
+    const { quiz, questionCounter, answerStatus } = this.state;
 
     return (
       <div className={classes.Quiz}>
@@ -95,6 +94,7 @@ export default class Quiz extends Component {
             activeAnswers={quiz[questionCounter].answers}
             activeQuizNumber={quiz[questionCounter].id}
             question={quiz[questionCounter].question}
+            answerStatus={answerStatus}
             onAnswerClick={this.onAnswerClickHandler}
           />
         </div>
