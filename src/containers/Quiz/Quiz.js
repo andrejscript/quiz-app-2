@@ -7,7 +7,7 @@ export default class Quiz extends Component {
   state = {
     questionCounter: 0,
     answerStatus: null, //{[id]: 'success'/'wrong'}
-    isFinished: true,
+    isFinished: false,
     results: {},
     quiz: [
       {
@@ -58,7 +58,7 @@ export default class Quiz extends Component {
   };
 
   onAnswerClickHandler = answerId => {
-    const { questionCounter, quiz } = this.state,
+    const { questionCounter, quiz, results } = this.state,
       activeQuestion = quiz[questionCounter];
     // Multiple click checking
     if (this.state.answerStatus) {
@@ -80,12 +80,21 @@ export default class Quiz extends Component {
       }, 1000);
 
       if (activeQuestion.rightAnswer === answerId) {
-        this.setState({ answerStatus: { [answerId]: 'success' } });
+        this.setState(state => ({
+          answerStatus: { ...state.answerStatus, [answerId]: 'success' },
+        }));
       } else {
-        this.setState({ answerStatus: { [answerId]: 'wrong' } });
+        results[answerId] = 'wrong';
+        this.setState(state => ({
+          answerStatus: { ...state.answerStatus, [answerId]: 'wrong' },
+        }));
       }
     }
   };
+
+  // function updateColorMap(colormap) {
+  //   return {...colormap, right: 'blue'};
+  // }
 
   isQuizFinished() {
     return this.state.questionCounter + 1 === this.state.quiz.length;
