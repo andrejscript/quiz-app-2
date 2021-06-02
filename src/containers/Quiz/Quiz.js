@@ -114,9 +114,7 @@ export default class Quiz extends Component {
         <div className={classes.QuizWrapper}>
           {isFinished ? (
             <>
-              <FinishedQuiz 
-                results
-              />
+              <FinishedQuiz results={results} quiz={quiz} />
             </>
           ) : (
             <>

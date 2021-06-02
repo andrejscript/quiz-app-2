@@ -1,10 +1,9 @@
 import React from 'react';
 import classes from './FinishedQuiz.module.css';
 
-const FinishedQuiz = props => {
-  //const {
+const FinishedQuiz = ({ results }) => {
+  console.log(results);
 
-  //} = props;
   return (
     <div className={classes.FinishedQuiz}>
       <ul>
