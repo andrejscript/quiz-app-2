@@ -58,8 +58,9 @@ export default class Quiz extends Component {
   };
 
   onAnswerClickHandler = answerId => {
-    const { questionCounter, quiz, results } = this.state,
+    const { questionCounter, quiz } = this.state,
       activeQuestion = quiz[questionCounter];
+
     // Multiple click checking
     if (this.state.answerStatus) {
       return;
@@ -69,46 +70,53 @@ export default class Quiz extends Component {
     if (this.isQuizFinished()) {
       this.setState({ isFinished: true });
     } else {
-      // Setting a timeout between checking responses
-      const timeout = window.setTimeout(() => {
-        this.setState(prevState => ({
-          questionCounter: prevState.questionCounter + 1,
-          answerStatus: null,
-        }));
-
-        window.clearTimeout(timeout);
-      }, 1000);
-
       if (activeQuestion.rightAnswer === answerId) {
+        const results = activeQuestion.id;
         this.setState(state => ({
           answerStatus: { ...state.answerStatus, [answerId]: 'success' },
+          results: { ...state.results, [results]: 'success' },
         }));
       } else {
-        results[answerId] = 'wrong';
+        const results = activeQuestion.id;
         this.setState(state => ({
           answerStatus: { ...state.answerStatus, [answerId]: 'wrong' },
+          results: { ...state.results, [results]: 'wrong' },
         }));
       }
+      this.goNextQuestion();
     }
   };
 
-  // function updateColorMap(colormap) {
-  //   return {...colormap, right: 'blue'};
-  // }
+  goNextQuestion = () => {
+    // Setting a timeout between checking responses
+    const timeout = window.setTimeout(() => {
+      this.setState(prevState => ({
+        questionCounter: prevState.questionCounter + 1,
+        answerStatus: null,
+      }));
+
+      window.clearTimeout(timeout);
+    }, 1000);
+  };
 
   isQuizFinished() {
     return this.state.questionCounter + 1 === this.state.quiz.length;
   }
 
   render() {
-    const { quiz, questionCounter, answerStatus, isFinished } = this.state;
+    const { quiz, questionCounter, answerStatus, isFinished, results } =
+      this.state;
+
+    console.log(results);
 
     return (
       <div className={classes.Quiz}>
         <div className={classes.QuizWrapper}>
           {isFinished ? (
             <>
-              <FinishedQuiz />
+              <FinishedQuiz 
+                results
+              />
             </>
           ) : (
             <>
