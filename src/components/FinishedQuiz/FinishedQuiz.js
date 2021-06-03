@@ -2,9 +2,7 @@ import React from 'react';
 import classes from './FinishedQuiz.module.css';
 
 const FinishedQuiz = ({ quiz, results }) => {
-  const cls = ['fa'];
-
-  console.log();
+  // console.log();
 
   if (results.id === 'wrong') {
     cls.push('wrong');
@@ -14,6 +12,8 @@ const FinishedQuiz = ({ quiz, results }) => {
     <div className={classes.FinishedQuiz}>
       <ul>
         {quiz.map((quizItem, index) => {
+          const cls = ['fa', results.id] === 'success' ? 'success' : 'wrong';
+
           return (
             <li key={quizItem.id}>
               <strong>{index + 1}. </strong>
