@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './FinishedQuiz.module.css';
+import Button from '../UI/Button/Button';
 
 const FinishedQuiz = ({ quiz, results, onRetest }) => {
   const successCount = Object.values(results).filter(
@@ -30,8 +31,7 @@ const FinishedQuiz = ({ quiz, results, onRetest }) => {
       <p>
         Right {successCount} from {quiz.length}
       </p>
-
-      <button onClick={onRetest}>Repeat the test</button>
+      <Button onRetest={onRetest}>Repeat this test</Button>
     </div>
   );
 };
