@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './Layout.module.css';
 import MenuToggle from '../../components/Navigation/MenuToggle/MenuToggle';
+import Drawer from '../../components/Navigation/Drawer/Drawer';
 
 export default class Layout extends Component {
   state = {
@@ -20,6 +21,7 @@ export default class Layout extends Component {
           onToggle={this.toggleMenuHandler}
           isOpen={this.state.menu}
         />
+        <Drawer />
         <main>{this.props.children}</main>
       </div>
     );
