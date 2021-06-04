@@ -1,18 +1,21 @@
 import React from 'react';
 import classes from './FinishedQuiz.module.css';
 
-const FinishedQuiz = ({ quiz, results }) => {
-  // console.log();
-
-  if (results.id === 'wrong') {
-    cls.push('wrong');
-  }
+const FinishedQuiz = ({ quiz, results, onRetest }) => {
+  const successCount = Object.values(results).filter(
+    i => i === 'success'
+  ).length;
 
   return (
     <div className={classes.FinishedQuiz}>
       <ul>
         {quiz.map((quizItem, index) => {
-          const cls = ['fa', results.id] === 'success' ? 'success' : 'wrong';
+          console.log();
+          const cls = [
+            'fa',
+            results[quizItem.id] === 'wrong' ? 'fa-times' : 'fa-check',
+            classes[results[quizItem.id]],
+          ];
 
           return (
             <li key={quizItem.id}>
@@ -20,18 +23,15 @@ const FinishedQuiz = ({ quiz, results }) => {
               {quizItem.question}
               <i className={cls.join(' ')} />
             </li>
-            /* <li>
-          <strong>2. </strong>
-          WT r doing?
-          <i className={'fa fa-check ' + classes.success}></i>
-        </li>  */
           );
         })}
       </ul>
 
-      <p>Right 3 from 10</p>
+      <p>
+        Right {successCount} from {quiz.length}
+      </p>
 
-      <button>Repeat the test</button>
+      <button onClick={onRetest}>Repeat the test</button>
     </div>
   );
 };

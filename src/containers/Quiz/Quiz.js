@@ -43,17 +43,17 @@ export default class Quiz extends Component {
           { text: 'Lawyer', id: 4 },
         ],
       },
-      {
-        question: 'What is your hobby?',
-        id: 4,
-        rightAnswer: 3,
-        answers: [
-          { text: 'Sport', id: 1 },
-          { text: 'Cooking', id: 2 },
-          { text: 'Travelling', id: 3 },
-          { text: 'Pets', id: 4 },
-        ],
-      },
+      // {
+      //   question: 'What is your hobby?',
+      //   id: 4,
+      //   rightAnswer: 3,
+      //   answers: [
+      //     { text: 'Sport', id: 1 },
+      //     { text: 'Cooking', id: 2 },
+      //     { text: 'Travelling', id: 3 },
+      //     { text: 'Pets', id: 4 },
+      //   ],
+      // },
     ],
   };
 
@@ -67,23 +67,23 @@ export default class Quiz extends Component {
     }
 
     // Finish Quiz cheching
+
+    if (activeQuestion.rightAnswer === answerId) {
+      const results = activeQuestion.id;
+      this.setState(state => ({
+        answerStatus: { ...state.answerStatus, [answerId]: 'success' },
+        results: { ...state.results, [results]: 'success' },
+      }));
+    } else {
+      const results = activeQuestion.id;
+      this.setState(state => ({
+        answerStatus: { ...state.answerStatus, [answerId]: 'wrong' },
+        results: { ...state.results, [results]: 'wrong' },
+      }));
+    }
+    this.goNextQuestion();
     if (this.isQuizFinished()) {
       this.setState({ isFinished: true });
-    } else {
-      if (activeQuestion.rightAnswer === answerId) {
-        const results = activeQuestion.id;
-        this.setState(state => ({
-          answerStatus: { ...state.answerStatus, [answerId]: 'success' },
-          results: { ...state.results, [results]: 'success' },
-        }));
-      } else {
-        const results = activeQuestion.id;
-        this.setState(state => ({
-          answerStatus: { ...state.answerStatus, [answerId]: 'wrong' },
-          results: { ...state.results, [results]: 'wrong' },
-        }));
-      }
-      this.goNextQuestion();
     }
   };
 
@@ -103,18 +103,30 @@ export default class Quiz extends Component {
     return this.state.questionCounter + 1 === this.state.quiz.length;
   }
 
+  retestHandler = () => {
+    this.setState({
+      questionCounter: 0,
+      answerStatus: null, //{[id]: 'success'/'wrong'}
+      isFinished: false,
+      results: {},
+    });
+  };
+
   render() {
     const { quiz, questionCounter, answerStatus, isFinished, results } =
       this.state;
-
-    console.log(results);
 
     return (
       <div className={classes.Quiz}>
         <div className={classes.QuizWrapper}>
           {isFinished ? (
             <>
-              <FinishedQuiz results={results} quiz={quiz} />
+              <h1>Results</h1>
+              <FinishedQuiz
+                results={results}
+                quiz={quiz}
+                onRetest={this.retestHandler}
+              />
             </>
           ) : (
             <>
