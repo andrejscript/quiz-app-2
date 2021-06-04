@@ -96,7 +96,7 @@ export default class Quiz extends Component {
       }));
 
       window.clearTimeout(timeout);
-    }, 1000);
+    }, 600);
   };
 
   isQuizFinished() {

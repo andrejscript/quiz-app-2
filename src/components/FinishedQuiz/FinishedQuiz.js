@@ -31,7 +31,12 @@ const FinishedQuiz = ({ quiz, results, onRetest }) => {
       <p>
         Right {successCount} from {quiz.length}
       </p>
-      <Button onRetest={onRetest}>Repeat this test</Button>
+      <Button onRetest={onRetest} type='primary'>
+        Repeat
+      </Button>
+      <Button onRetest={onRetest} type='success'>
+        Test list
+      </Button>
     </div>
   );
 };

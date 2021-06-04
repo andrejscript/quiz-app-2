@@ -1,8 +1,17 @@
 import React from 'react';
 import classes from './Button.module.css';
 
-const Button = ({ onRetest }) => {
-  return <button className={classes.Button} onClick={onRetest} />;
+const Button = props => {
+  const cls = [classes.Button, classes[props.type]];
+
+  return (
+    <button
+      className={cls.join(' ')}
+      onClick={props.onRetest}
+      disabled={props.disabled}>
+      {props.children}
+    </button>
+  );
 };
 
 export default Button;
