@@ -1,13 +1,16 @@
 import React from 'react';
-import classes from './MeuToggle.module.css';
-const MeuToggle = props => {
-  //const {
+import classes from './MenuToggle.module.css';
+const MenuToggle = props => {
+  const cls = [
+    classes.MenuToggle,
+    'fa',
     
-  //} = props;
+  ]
+
   return (
-   <div className={}>
-   </div>
+   <i className={}>
+   </i>
   );
 };
   
-export default MeuToggle;
+export default MenuToggle;
