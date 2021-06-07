@@ -113,8 +113,13 @@ export default class Quiz extends Component {
   };
 
   render() {
-    const { quiz, questionCounter, answerStatus, isFinished, results } =
-      this.state;
+    const {
+      quiz,
+      questionCounter,
+      answerStatus,
+      isFinished,
+      results,
+    } = this.state;
 
     return (
       <div className={classes.Quiz}>

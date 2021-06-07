@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 import classes from './Drawer.module.css';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 
-const links = [1, 2, 3];
+const links = [
+  { to: '/', label: 'Quiz list', exact: true },
+  { to: '/auth', label: 'Auth', exact: false },
+  { to: '/quiz-creator', label: 'Create Quiz', exact: false },
+];
 
 export default class Drawer extends Component {
   renderLinks() {
     return links.map((link, index) => {
       return (
         <li key={index}>
-          {' '}
-          <a>Link {link}</a>
+          <NavLink to={link.to} exact={link.exact} className={classes.active}>
+            {link.label}
+          </NavLink>
         </li>
       );
     });
