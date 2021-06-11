@@ -6,6 +6,13 @@ export default class QuizCreator extends Component {
     return (
       <div>
         <h1>QuizCreator</h1>
+        <p>text</p>
+        <p>text</p>
+        <p>text</p>
+        <p>text</p>
+        <p>text</p>
+        <p>text</p>
+
       </div>
     );
   }
