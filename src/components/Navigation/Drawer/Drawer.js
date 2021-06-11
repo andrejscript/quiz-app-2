@@ -10,11 +10,20 @@ const links = [
 ];
 
 export default class Drawer extends Component {
+
+  clickHandler = ()=> {
+    this.props.onToggle()
+  }
+
   renderLinks() {
     return links.map((link, index) => {
       return (
         <li key={index}>
-          <NavLink to={link.to} exact={link.exact} className={classes.active}>
+          <NavLink 
+            to={link.to} 
+            exact={link.exact} 
+            activeClassName={classes.active}
+            onClick={this.clickHandler}>
             {link.label}
           </NavLink>
         </li>
