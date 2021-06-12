@@ -1,6 +1,8 @@
 import React from 'react';
 import classes from './FinishedQuiz.module.css';
 import Button from '../UI/Button/Button';
+import { Link } from 'react-router-dom';
+import QuizList from '../../containers/QuizList/QuizList';
 
 const FinishedQuiz = ({ quiz, results, onRetest }) => {
   const successCount = Object.values(results).filter(
@@ -34,9 +36,9 @@ const FinishedQuiz = ({ quiz, results, onRetest }) => {
       <Button onRetest={onRetest} type='primary'>
         Repeat
       </Button>
-      <Button onRetest={onRetest} type='success'>
-        Test list
-      </Button>
+
+      <Link to='/'><Button onRetest={onRetest} type='success'>Test list</Button></Link>
+
     </div>
   );
 };
