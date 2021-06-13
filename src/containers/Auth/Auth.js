@@ -24,7 +24,7 @@ export default class Auth extends Component {
 
           <h1>Auth</h1>
 
-          <form onSubmit={this.submitHandler}>
+          <form onSubmit={this.submitHandler} className={classes.AuthForm}>
             <input type='text' />
             <input type='text' />
             <Button type='success' onClick={this.loginHandler}>Sign In</Button>
