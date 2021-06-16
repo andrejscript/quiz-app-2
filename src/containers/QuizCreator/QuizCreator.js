@@ -10,6 +10,8 @@ export default class QuizCreator extends Component {
         <p>text</p>
         <p>text</p>
         <p>text</p>
+        <p>text</p>
+        <p>text</p>
       </div>
     );
   }
