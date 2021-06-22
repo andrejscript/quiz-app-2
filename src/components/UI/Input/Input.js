@@ -1,7 +1,9 @@
 import React from 'react';
 import classes from './Input.module.css';
 
-function isInvalid({ valid, touched, shouldValidate }) {}
+function isInvalid({ valid, touched, shouldValidate }) {
+  return !valid && touched && shouldValidate;
+}
 
 const Input = props => {
   const inputType = props.type || 'text',
