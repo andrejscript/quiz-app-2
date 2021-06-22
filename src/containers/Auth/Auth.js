@@ -45,10 +45,27 @@ export default class Auth extends Component {
     console.log(`2:`, e);
   };
 
+  onChangeHandler = (e, inputName) => {
+    console.log(inputName, e.target.value);
+  };
+
   renderInputs() {
-    return Object.keys(this.state.formControl).map((controlName, index) => {
-      const control = this.state.formControl[controlName];
-      return <Input key={controlName + index} type={control} />;
+    return Object.keys(this.state.formControl).map((inputName, index) => {
+      const control = this.state.formControl[inputName];
+      return (
+        <Input
+          key={inputName + index}
+          type={control.type}
+          value={control.value}
+          valid={control.valid}
+          touched={control.touched}
+          label={control.label}
+          label={control.label}
+          shouldValidate={!!control.validation}
+          errorMessage={control.errorMessage}
+          onChange={e => this.onChangeHandler(e, inputName)}
+        />
+      );
     });
   }
 
@@ -60,9 +77,6 @@ export default class Auth extends Component {
 
           <form onSubmit={this.submitHandler} className={classes.AuthForm}>
             {this.renderInputs()}
-
-            <Input label='Email' />
-            <Input label='Password' />
             <Button type='success' onClick={this.loginHandler}>
               Sign In
             </Button>
