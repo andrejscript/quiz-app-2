@@ -3,6 +3,11 @@ import classes from './Auth.module.css';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 
+function validateEmail(email) {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
+
 export default class Auth extends Component {
   state = {
     formControls: {
@@ -53,12 +58,15 @@ export default class Auth extends Component {
     let isValid = true;
 
     if (validation.required) {
+      isValid = value.trim() !== '' && isValid;
     }
 
     if (validation.email) {
+      isValid = validateEmail(value) && isValid;
     }
 
     if (validation.minLength) {
+      isValid = value >= validation.minLength;
     }
 
     return isValid;
