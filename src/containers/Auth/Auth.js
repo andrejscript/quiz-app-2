@@ -45,16 +45,45 @@ export default class Auth extends Component {
     console.log(`2:`, e);
   };
 
+  validateControl(value, validation) {
+    if (!validation) {
+      return true;
+    }
+
+    let isValid = true;
+
+    if (validation.required) {
+    }
+
+    if (validation.email) {
+    }
+
+    if (validation.minLength) {
+    }
+
+    return isValid;
+  }
+
   onChangeHandler = (e, inputName) => {
     console.log(inputName, e.target.value);
 
     const formControls = { ...this.state.formControls };
+    const control = { ...formControls[inputName] };
+
+    control.value = e.target.value;
+    control.touched = true;
+    control.valid = this.validateControl(control.value, control.validation);
+
+    formControls[inputName] = control;
+
+    this.setState({
+      formControls,
+    });
   };
 
   renderInputs() {
     return Object.keys(this.state.formControls).map((inputName, index) => {
       const control = this.state.formControls[inputName];
-      const control
 
       return (
         <Input
