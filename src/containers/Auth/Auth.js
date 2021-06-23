@@ -5,7 +5,7 @@ import Input from '../../components/UI/Input/Input';
 
 export default class Auth extends Component {
   state = {
-    formControl: {
+    formControls: {
       email: {
         value: '',
         type: 'email',
@@ -47,11 +47,15 @@ export default class Auth extends Component {
 
   onChangeHandler = (e, inputName) => {
     console.log(inputName, e.target.value);
+
+    const formControls = { ...this.state.formControls };
   };
 
   renderInputs() {
-    return Object.keys(this.state.formControl).map((inputName, index) => {
-      const control = this.state.formControl[inputName];
+    return Object.keys(this.state.formControls).map((inputName, index) => {
+      const control = this.state.formControls[inputName];
+      const control
+
       return (
         <Input
           key={inputName + index}
