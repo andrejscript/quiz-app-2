@@ -10,6 +10,7 @@ export default class Auth extends Component {
     formControls: {
       email: {
         value: '',
+        placeholderDefault: 'example@mail.com',
         type: 'email',
         label: 'Email',
         errorMessage: 'Enter correct email',
@@ -22,6 +23,7 @@ export default class Auth extends Component {
       },
       password: {
         value: '',
+        placeholderDefault: '******',
         type: 'password',
         label: 'Password',
         errorMessage: 'Enter correct password',
@@ -97,6 +99,7 @@ export default class Auth extends Component {
         <Input
           key={inputName + index}
           type={control.type}
+          placeholder={control.placeholderDefault}
           value={control.value}
           valid={control.valid}
           touched={control.touched}
