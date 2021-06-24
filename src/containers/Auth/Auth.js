@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import classes from './Auth.module.css';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
-
-function validateEmail(email) {
-  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
-}
+import is from 'is_js';
 
 export default class Auth extends Component {
   state = {
+    isFormValid: false,
     formControls: {
       email: {
         value: '',
@@ -42,13 +39,9 @@ export default class Auth extends Component {
     e.preventDefault();
   };
 
-  loginHandler = e => {
-    console.log(`1:`, e);
-  };
+  loginHandler = () => {};
 
-  registerHandler = e => {
-    console.log(`2:`, e);
-  };
+  registerHandler = () => {};
 
   validateControl(value, validation) {
     if (!validation) {
@@ -62,11 +55,11 @@ export default class Auth extends Component {
     }
 
     if (validation.email) {
-      isValid = validateEmail(value) && isValid;
+      isValid = is.email(value) && isValid;
     }
 
     if (validation.minLength) {
-      isValid = value >= validation.minLength;
+      isValid = value.length >= validation.minLength;
     }
 
     return isValid;
@@ -84,8 +77,15 @@ export default class Auth extends Component {
 
     formControls[inputName] = control;
 
+    let isFormValid = true;
+
+    Object.keys(formControls).forEach(name => {
+      isFormValid = formControls[name].valid && isFormValid;
+    });
+
     this.setState({
       formControls,
+      isFormValid,
     });
   };
 
@@ -100,7 +100,6 @@ export default class Auth extends Component {
           value={control.value}
           valid={control.valid}
           touched={control.touched}
-          label={control.label}
           label={control.label}
           shouldValidate={!!control.validation}
           errorMessage={control.errorMessage}
@@ -118,10 +117,16 @@ export default class Auth extends Component {
 
           <form onSubmit={this.submitHandler} className={classes.AuthForm}>
             {this.renderInputs()}
-            <Button type='success' onClick={this.loginHandler}>
+            <Button
+              type='success'
+              disabled={!this.state.isFormValid}
+              onClick={this.loginHandler}>
               Sign In
             </Button>
-            <Button type='primary' onClick={this.registerHandler}>
+            <Button
+              type='primary'
+              disabled={!this.state.isFormValid}
+              onClick={this.registerHandler}>
               Sign Up
             </Button>
           </form>
