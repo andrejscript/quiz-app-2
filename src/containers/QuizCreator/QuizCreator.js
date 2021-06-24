@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import classes from './QuizCreator.module.css';
 import Button from '../../components/UI/Button/Button';
+import Input from '../../components/UI/Input/Input';
 
 export default class QuizCreator extends Component {
+  state = {
+    quiz: [],
+    formControls: {
+      question: '',
+      option1: '',
+      option2: '',
+      option3: '',
+      option4: '',
+    },
+  };
+
   sibmitHandler = e => {
     e.preventDefault();
   };
