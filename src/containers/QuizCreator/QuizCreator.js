@@ -2,16 +2,34 @@ import React, { Component } from 'react';
 import classes from './QuizCreator.module.css';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
+import { createControl } from '../../form/formFramework';
+
+function createOptionControl(number) {
+  return createControl(
+    {
+      label: `${number}`,
+      errorMessage: "The field can't be empty",
+      id: number,
+    },
+    { required: true }
+  );
+}
 
 export default class QuizCreator extends Component {
   state = {
     quiz: [],
     formControls: {
-      question: '',
-      option1: '',
-      option2: '',
-      option3: '',
-      option4: '',
+      question: createControl(
+        {
+          label: 'Enter new question',
+          errorMessage: "The field can't be empty",
+        },
+        { required: true }
+      ),
+      option1: createControl(1),
+      option2: createControl(2),
+      option3: createControl(3),
+      option4: createControl(4),
     },
   };
 
