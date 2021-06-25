@@ -15,31 +15,54 @@ function createOptionControl(number) {
   );
 }
 
+function createFormControls() {
+  return {
+    question: createControl(
+      {
+        label: 'Enter new question',
+        errorMessage: "The field can't be empty",
+      },
+      { required: true }
+    ),
+    option1: createOptionControl(1),
+    option2: createOptionControl(2),
+    option3: createOptionControl(3),
+    option4: createOptionControl(4),
+  };
+}
+
 export default class QuizCreator extends Component {
   state = {
     quiz: [],
-    formControls: {
-      question: createControl(
-        {
-          label: 'Enter new question',
-          errorMessage: "The field can't be empty",
-        },
-        { required: true }
-      ),
-      option1: createControl(1),
-      option2: createControl(2),
-      option3: createControl(3),
-      option4: createControl(4),
-    },
+    formControls: createFormControls(),
   };
 
-  sibmitHandler = e => {
+  submitHandler = e => {
     e.preventDefault();
   };
 
   addQuestionHandler = () => {};
 
   createQuizHandler = () => {};
+
+  renderControls() {
+    return Object.keys(
+      this.state.formControls.map((controlItem, i) => {
+        const control = this.state.formControls[controlItem];
+        return (
+          <Input
+            label={control.label}
+            value={control.value}
+            valid={control.valid}
+            shouldValidate={!!control.validation}
+            touched={control.touched}
+            errorMessage={control.errorMessage}
+            onChange={e => this.changeHandler(e.target, controlItem)}
+          />
+        );
+      })
+    );
+  }
 
   render() {
     return (
@@ -48,12 +71,7 @@ export default class QuizCreator extends Component {
           <h1>Test creation</h1>
 
           <form onSubmit={this.submitHandler}>
-            <input type='text' />
-            <hr />
-            <input type='text' />
-            <input type='text' />
-            <input type='text' />
-            <input type='text' />
+            {this.renderControls()}
             <select></select>
 
             <Button type='primary' onClick={this.addQuestionHandler}>
