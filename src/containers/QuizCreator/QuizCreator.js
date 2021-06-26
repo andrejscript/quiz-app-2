@@ -84,13 +84,16 @@ export default class QuizCreator extends Component {
     });
   };
 
-  createQuizHandler = () => {
+  createQuizHandler = async () => {
     console.log(this.state.quiz);
 
-    axios.post(
-      'https://react-quiz-ac53f-default-rtdb.europe-west1.firebasedatabase.app/quizes.json',
-      this.state.quiz
-    );
+    // axios
+    //   .post(
+    //     'https://react-quiz-ac53f-default-rtdb.europe-west1.firebasedatabase.app/quizes.json',
+    //     this.state.quiz
+    //   )
+    //   .then(response => console.log(response))
+    //   .catch(error => console.log(error));
   };
 
   changeHandler = (value, controlName) => {
