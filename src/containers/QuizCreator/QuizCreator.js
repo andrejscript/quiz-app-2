@@ -48,7 +48,9 @@ export default class QuizCreator extends Component {
 
   createQuizHandler = () => {};
 
-  changeHandler = (value, controlName) => {};
+  changeHandler = (value, controlName) => {
+    const formControls = { ...this.state.formControls };
+  };
 
   renderControls() {
     return Object.keys(this.state.formControls).map((controlName, i) => {
@@ -71,12 +73,22 @@ export default class QuizCreator extends Component {
     });
   }
 
+  selectChangeHandler = e => {
+    this.setState({ rightAnswerId: +e.target.value });
+  };
+
   render() {
-    const Select = (
+    const select = (
       <Select
         label='Choose right answer'
         value={this.state.rightAnswerId}
         onChange={this.selectChangeHandler}
+        options={[
+          { text: 1, value: 1 },
+          { text: 2, value: 2 },
+          { text: 3, value: 3 },
+          { text: 4, value: 4 },
+        ]}
       />
     );
     return (
@@ -86,7 +98,7 @@ export default class QuizCreator extends Component {
 
           <form onSubmit={this.submitHandler}>
             {this.renderControls()}
-            <select></select>
+            {select}
 
             <Button type='primary' onClick={this.addQuestionHandler}>
               Add question
