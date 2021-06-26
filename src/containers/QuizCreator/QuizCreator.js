@@ -9,6 +9,7 @@ import {
   validateForm,
 } from '../../form/formFramework';
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
+import axios from 'axios';
 
 function createOptionControl(number) {
   return createControl(
@@ -85,6 +86,11 @@ export default class QuizCreator extends Component {
 
   createQuizHandler = () => {
     console.log(this.state.quiz);
+
+    axios.post(
+      'https://react-quiz-ac53f-default-rtdb.europe-west1.firebasedatabase.app/quizes.json',
+      this.state.quiz
+    );
   };
 
   changeHandler = (value, controlName) => {
