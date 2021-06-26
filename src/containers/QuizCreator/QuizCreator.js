@@ -53,7 +53,7 @@ export default class QuizCreator extends Component {
       const control = this.state.formControls[controlName];
 
       return (
-        <>
+        <Auxiliary key={controlName + i}>
           <Input
             label={control.label}
             value={control.value}
@@ -64,7 +64,7 @@ export default class QuizCreator extends Component {
             onChange={e => this.changeHandler(e.target.value, controlName)}
           />
           {i === 0 ? <hr /> : null}
-        </>
+        </Auxiliary>
       );
     });
   }
