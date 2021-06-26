@@ -3,11 +3,12 @@ import classes from './QuizCreator.module.css';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import { createControl } from '../../form/formFramework';
+import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 
 function createOptionControl(number) {
   return createControl(
     {
-      label: `${number}`,
+      label: `Option ${number}`,
       errorMessage: "The field can't be empty",
       id: number,
     },
@@ -45,11 +46,14 @@ export default class QuizCreator extends Component {
 
   createQuizHandler = () => {};
 
+  changeHandler = (value, controlName) => {};
+
   renderControls() {
-    return Object.keys(
-      this.state.formControls.map((controlItem, i) => {
-        const control = this.state.formControls[controlItem];
-        return (
+    return Object.keys(this.state.formControls).map((controlName, i) => {
+      const control = this.state.formControls[controlName];
+
+      return (
+        <>
           <Input
             label={control.label}
             value={control.value}
@@ -57,11 +61,12 @@ export default class QuizCreator extends Component {
             shouldValidate={!!control.validation}
             touched={control.touched}
             errorMessage={control.errorMessage}
-            onChange={e => this.changeHandler(e.target, controlItem)}
+            onChange={e => this.changeHandler(e.target.value, controlName)}
           />
-        );
-      })
-    );
+          {i === 0 ? <hr /> : null}
+        </>
+      );
+    });
   }
 
   render() {
