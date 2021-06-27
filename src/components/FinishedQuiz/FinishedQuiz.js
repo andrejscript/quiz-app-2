@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './FinishedQuiz.module.css';
 import Button from '../UI/Button/Button';
 import { Link } from 'react-router-dom';
-import QuizList from '../../containers/QuizList/QuizList';
+// import QuizList from '../../containers/QuizList/QuizList';
 
 const FinishedQuiz = ({ quiz, results, onRetest }) => {
   const successCount = Object.values(results).filter(i => i === 'success')

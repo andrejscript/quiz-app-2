@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import classes from './Quiz.module.css';
 import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz';
 import FinishedQuiz from '../../components/FinishedQuiz/FinishedQuiz';
+import Loader from '../../components/UI/Loader/Loader';
+import axios from '../../axios/axios-quiz';
 
 export default class Quiz extends Component {
   state = {
@@ -9,47 +11,16 @@ export default class Quiz extends Component {
     answerStatus: null, //{[id]: 'success'/'wrong'}
     isFinished: false,
     results: {},
-    quiz: [
-      {
-        question: 'What is your name?',
-        id: 1,
-        rightAnswer: 4,
-        answers: [
-          { text: 'Jack', id: 1 },
-          { text: 'Smith', id: 2 },
-          { text: 'Joe', id: 3 },
-          { text: 'Willy', id: 4 },
-        ],
-      },
-      {
-        question: 'How old are you?',
-        id: 2,
-        rightAnswer: 2,
-        answers: [
-          { text: '17', id: 1 },
-          { text: '32', id: 2 },
-          { text: '22', id: 3 },
-          { text: '45', id: 4 },
-        ],
-      },
-      {
-        question: 'What is your job?',
-        id: 3,
-        rightAnswer: 3,
-        answers: [
-          { text: 'Sailor', id: 1 },
-          { text: 'Artist', id: 2 },
-          { text: 'Coder', id: 3 },
-          { text: 'Lawyer', id: 4 },
-        ],
-      },
-    ],
+    quiz: [],
+    loading: true,
   };
 
   onAnswerClickHandler = answerId => {
     const { questionCounter, quiz } = this.state,
       activeQuestion = quiz[questionCounter];
 
+    console.log(answerId);
+    console.log(activeQuestion.rightAnswerId);
     // Multiple click checking
     if (this.state.answerStatus) {
       return;
@@ -57,7 +28,7 @@ export default class Quiz extends Component {
 
     // Finish Quiz cheching
 
-    if (activeQuestion.rightAnswer === answerId) {
+    if (activeQuestion.rightAnswerId === answerId) {
       const results = activeQuestion.id;
       this.setState(state => ({
         answerStatus: { ...state.answerStatus, [answerId]: 'success' },
@@ -101,24 +72,36 @@ export default class Quiz extends Component {
     });
   };
 
-  componentDidMount() {
-    console.log(this.props.match);
-    console.log(`Quiz ID =`, this.props.match.params.id);
+  async componentDidMount() {
+    try {
+      const response = await axios.get(
+        `/quizes/${this.props.match.params.id}.json`
+      );
+      const quiz = response.data;
+      console.log(quiz);
+      this.setState({ quiz, loading: false });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render() {
+    // console.log(this.state.answerStatus);
     const {
       quiz,
       questionCounter,
       answerStatus,
       isFinished,
       results,
+      loading,
     } = this.state;
 
     return (
       <div className={classes.Quiz}>
         <div className={classes.QuizWrapper}>
-          {isFinished ? (
+          {loading ? (
+            <Loader />
+          ) : isFinished ? (
             <>
               <h1>Results</h1>
               <FinishedQuiz

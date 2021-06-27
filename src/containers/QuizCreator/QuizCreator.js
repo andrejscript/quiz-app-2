@@ -9,7 +9,7 @@ import {
   validateForm,
 } from '../../form/formFramework';
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
-import axios from 'axios';
+import axios from '../../axios/axios-quiz';
 
 function createOptionControl(number) {
   return createControl(
@@ -85,11 +85,8 @@ export default class QuizCreator extends Component {
   };
 
   createQuizHandler = async () => {
-    const url =
-      'https://react-quiz-ac53f-default-rtdb.europe-west1.firebasedatabase.app/quizes.json';
-
     try {
-      await axios.post(url, this.state.quiz);
+      await axios.post('/quizes.json', this.state.quiz);
 
       this.setState({
         quiz: [],
