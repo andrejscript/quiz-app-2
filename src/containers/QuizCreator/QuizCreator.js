@@ -37,7 +37,7 @@ function createFormControls() {
     option4: createOptionControl(4),
   };
 }
-// https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]
+
 export default class QuizCreator extends Component {
   state = {
     quiz: [],

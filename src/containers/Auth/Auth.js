@@ -44,7 +44,11 @@ export default class Auth extends Component {
 
   loginHandler = () => {};
 
-  registerHandler = () => {};
+  registerHandler = async () => {
+    axios.post(
+      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCCgajHqrY8_ujcPYE_ba3zWgaVmEqwnMo'
+    );
+  };
 
   validateControl(value, validation) {
     if (!validation) {
@@ -67,7 +71,7 @@ export default class Auth extends Component {
 
     return isValid;
   }
-
+  _2yss__1
   onChangeHandler = (e, inputName) => {
     console.log(inputName, e.target.value);
 
