@@ -42,12 +42,36 @@ export default class Auth extends Component {
     e.preventDefault();
   };
 
-  loginHandler = () => {};
+  loginHandler = async () => {
+    const authData = {
+      email: this.state.formControls.email.value,
+      password: this.state.formControls.password.value,
+      returnSecureToken: true,
+    };
+    try {
+      const response = await axios.post(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCCgajHqrY8_ujcPYE_ba3zWgaVmEqwnMo',
+        authData
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   registerHandler = async () => {
-    axios.post(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCCgajHqrY8_ujcPYE_ba3zWgaVmEqwnMo'
-    );
+    const authData = {
+      email: this.state.formControls.email.value,
+      password: this.state.formControls.password.value,
+      returnSecureToken: true,
+    };
+    try {
+      const response = await axios.post(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCCgajHqrY8_ujcPYE_ba3zWgaVmEqwnMo',
+        authData
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   validateControl(value, validation) {
@@ -71,7 +95,7 @@ export default class Auth extends Component {
 
     return isValid;
   }
-  _2yss__1
+  _2yss__1;
   onChangeHandler = (e, inputName) => {
     console.log(inputName, e.target.value);
 
