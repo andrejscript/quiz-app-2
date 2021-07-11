@@ -97,8 +97,6 @@ export default class Auth extends Component {
   }
   _2yss__1;
   onChangeHandler = (e, inputName) => {
-    console.log(inputName, e.target.value);
-
     const formControls = { ...this.state.formControls };
     const control = { ...formControls[inputName] };
 
